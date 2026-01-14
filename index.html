@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title> <!-- Comes from script.js-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="terminal">
+      <a id="boundary"></a>
+    </div>
+    <div id="command" onclick="$('shell').focus();">
+      <textarea
+        type="text"
+        id="shell"
+        autofocus
+      ></textarea>
+      <div id="liner">
+        <span id="typer"></span><b class="cursor" id="cursor">█</b>
+      </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
