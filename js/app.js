@@ -1,4 +1,5 @@
 import {PROMPT, BOOT_TITLE, PAUSED_TITLE} from './config.js';
+import {COMMANDS} from './commands.js';
 
 const shell = document.getElementById("shell");
 const typer = document.getElementById("typer");
@@ -38,6 +39,21 @@ document.addEventListener("click", () => {
     shell.focus();
 });
 
+const printLine = (html) => {
+    const p = document.createElement("p");
+    p.innerHTML = html;
+    terminal.insertBefore(p, boundary);
+}
+
+const printLines = (lines) => {
+    lines.forEach(line => printLine(line));
+}
+
+const clearTerminal = () => {
+    terminal.innerHTML = '<a id="boundary"></a>';
+    boundary = document.getElementById("boundary");
+}
+
 shell.addEventListener("keydown", (e) => {
     if(e.ctrlKey || e.metaKey) return;
     if(e.key === "Backspace"){
@@ -53,6 +69,22 @@ shell.addEventListener("keydown", (e) => {
         inputLine.innerHTML = `<span class="prompt">${PROMPT}</span>`
             + ` <span class="command">${buffer}</span>`;
         terminal.insertBefore(inputLine, boundary);
+
+        const entry = COMMANDS[command];
+
+        if(!entry && command != ""){
+            printLines([
+                "",
+                `<span class="error">command not found:</span> ${command}`,
+                "Type <span class='command'>help</span> to see available commands.",
+                ""
+            ]);
+        }else if(entry?.action === "CLEAR"){
+            clearTerminal();
+        }else if(entry?.output){
+            printLines(entry.output);
+        }
+
         updateTitle(command);
 
         buffer = "";
