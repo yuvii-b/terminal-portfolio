@@ -5,7 +5,7 @@ const shell = document.getElementById("shell");
 const typer = document.getElementById("typer");
 const commandArea = document.getElementById("command");
 const terminal = document.getElementById("terminal");
-const boundary = document.getElementById("boundary");
+let boundary = document.getElementById("boundary");
 
 let buffer = "";
 let mode = "boot";
@@ -31,7 +31,7 @@ document.addEventListener("visibilitychange", () => {
         document.title = PAUSED_TITLE;
     }else{
         document.title = (mode === "shell")
-             ? `${PROMPT}${lastCommand}`.trim() : BOOT_TITLE;
+             ? `${PROMPT} ${lastCommand}`.trim() : BOOT_TITLE;
     }
 });
 
@@ -72,12 +72,12 @@ shell.addEventListener("keydown", (e) => {
 
         const entry = COMMANDS[command];
 
-        if(!entry && command != ""){
+        if(!entry && command !== ""){
             printLines([
-                "",
-                `<span class="error">command not found:</span> ${command}`,
+                "<br>",
+                `<span class="error">command not found</span>`,
                 "Type <span class='command'>help</span> to see available commands.",
-                ""
+                "<br>"
             ]);
         }else if(entry?.action === "CLEAR"){
             clearTerminal();
