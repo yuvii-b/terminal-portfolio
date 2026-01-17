@@ -1,32 +1,180 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  padding: 20px;
-  background: #0d1117;
-  color: #c9d1d9;
-  font-family: monospace;
+    margin: 0;
+    padding: 15px 20px;
+    background: #300a24;
+    color: #ffffff;
+    font-family: 'Ubuntu Mono', 'DejaVu Sans Mono', 'Liberation Mono', 'Consolas', monospace;
+    font-size: 15px;
+    line-height: 1.3em;
+    min-height: 100vh;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #555555 #300a24;
+}
+
+#terminal {
+    background: #300a24;
+}
+
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #300a24;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #555555;
+    border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #666666;
+}
+
+#terminal p {
+    display: block;
+    line-height: 1.3em;
+    margin: 0;
+    word-wrap: break-word;
+}
+
+#command {
+    position: relative;
+    margin-top: 0;
+    background: #300a24;
+    display: flex;
+    align-items: center;
 }
 
 #shell {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 1px;
+    height: 1px;
 }
 
-#liner::before{
-    content: "yuvi@dev:~$";
+#liner {
+    font-size: 15px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    line-height: 1.3em;
+}
+
+#liner::before {
+    content: "yuvi@dev:~$ ";
+    color: #8ae234;
+    font-weight: normal;
+    margin-right: 0;
+    user-select: none;
+}
+
+.prompt {
+    color: #8ae234;
+    font-weight: normal;
+    user-select: none;
+}
+
+#typer {
+    color: #ffffff;
+    margin-left: 8px;
+    margin-right: 2px;
+}
+
+.command {
+    color: #ffffff;
+    font-weight: normal;
 }
 
 .cursor {
-  animation: blinker 1s linear infinite;
+    color: #ffffff;
+    background-color: #ffffff;
+    animation: blinker 1s linear infinite;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1;
 }
 
 @keyframes blinker {
-  50% {
-    opacity: 0;
-  }
+    50% {
+        opacity: 0;
+    }
+}
+
+.error {
+    color: #ff5555;
+    font-weight: normal;
+}
+
+a {
+    color: #729fcf;
+    text-decoration: underline;
+}
+
+a:hover {
+    background: #8ae234;
+    color: #300a24;
+}
+
+a:visited {
+    color: #ad7fa8;
+}
+
+a:focus {
+    outline: 0;
+}
+
+#boundary {
+    display: block;
+    height: 0;
+}
+
+::selection {
+    background: #ffffff;
+    color: #300a24;
+}
+
+::-moz-selection {
+    background: #ffffff;
+    color: #300a24;
+}
+
+body:focus-within {
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        padding: 15px;
+    }
+    
+    #liner {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+        padding: 10px;
+    }
+    
+    #liner {
+        font-size: 12px;
+    }
+    
+    #liner::before {
+        content: "$ ";
+    }
 }
