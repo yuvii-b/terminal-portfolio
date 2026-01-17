@@ -57,9 +57,10 @@ body::-webkit-scrollbar-thumb:hover {
 #shell {
     position: absolute;
     opacity: 0;
-    pointer-events: none;
     width: 1px;
     height: 1px;
+    left: 0;
+    top: 0;
 }
 
 #liner {
@@ -89,6 +90,7 @@ body::-webkit-scrollbar-thumb:hover {
     color: #ffffff;
     margin-left: 8px;
     margin-right: 2px;
+    white-space: pre;
 }
 
 .command {
