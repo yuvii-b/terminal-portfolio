@@ -66,8 +66,7 @@ shell.addEventListener("keydown", (e) => {
         e.preventDefault();
         const command = buffer.trim();
         const inputLine = document.createElement("p");
-        inputLine.innerHTML = `<span class="prompt">${PROMPT}</span>`
-            + ` <span class="command">${buffer}</span>`;
+        inputLine.innerHTML = `<span class="prompt">${PROMPT}</span> <span class="command">${buffer}</span>`;
         terminal.insertBefore(inputLine, boundary);
 
         const entry = COMMANDS[command];
