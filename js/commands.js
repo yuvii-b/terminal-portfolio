@@ -1,32 +1,53 @@
+import * as constants from './config.js'
+
 export const COMMANDS = {
   help: {
     output: [
       "<br>",
-      "<span class='command'>help</span>     - show this message",
-      "<span class='command'>about</span>    - about me",
-      "<span class='command'>projects</span> - view projects",
-      "<span class='command'>social</span>   - social links",
-      "<span class='command'>clear</span>    - clear terminal",
+      "<span class='command'>help</span>     - You know about this",
+      "<span class='command'>about</span>    - About me",
+      "<span class='command'>projects</span> - View coding projects",
+      "<span class='command'>social</span>   - View social links",
+      "<span class='command'>clear</span>    - Clear terminal",
       "<br>"
     ]
   },
 
   about: {
-    output: [
-      "<br>",
-      "Yuvaraj (<span class='command'>Yuvi</span>)",
-      "CSE student | Backend & Systems enthusiast",
-      "Likes building things from scratch.",
-      "<br>"
-    ]
-  },
+  output: [
+    "<br>",
+    "Yuvaraj (<span class='command'>Yuvi</span>)",
+    "I'm a Computer Science undergraduate at the Madras Institute of Technology.", 
+    "I like working on logic-based problems and building things from scratch just to see how they actually work.",
+    "Most days I'm either learning core CS concepts, experimenting with small projects, or breaking something and fixing it again.",
+    "Also a member of Google Developer Groups (GDG).",
+    "<br>"
+  ]
+},
+
 
   projects: {
     output: [
       "<br>",
-      "• <a href='https://github.com/yourusername/terminal-portfolio' target='_blank'>Terminal Portfolio</a>",
-      "• <a href='https://github.com/yourusername/telegram-bot' target='_blank'>Telegram Bot (Java)</a>",
-      "• <a href='https://github.com/yourusername/cli-chat' target='_blank'>CLI Chat App</a>",
+      "<span class='command'>URL Shortener</span>",
+      "A C++ URL shortener with CLI and web UI using Crow-CPP. Shortens long URLs with hashing, stores them in SQLite, and handles redirection via a built-in HTTP server.",
+      `<a href='${constants.projects.URL_SHORTENER}' target='_blank'>${constants.projects.URL_SHORTENER}</a>`,
+      "<br>",
+      "<span class='command'>PassPal Bot</span>",
+      "PassPal is a simple, private Telegram bot built in Java with Spring Boot to manage my passwords.",
+      `<a href='${constants.projects.PASSPAL_BOT}' target='_blank'>${constants.projects.PASSPAL_BOT}</a>`,
+      "<br>",
+      "<span class='command'>Instagram Unsaver</span>",
+      "A Python automation tool using Selenium to unsave all your saved Instagram posts effortlessly.",
+      `<a href='${constants.projects.INSTAGRAM_UNSAVER}' target='_blank'>${constants.projects.INSTAGRAM_UNSAVER}</a>`,
+      "<br>",
+      "<span class='command'>Terminal Portfolio</span>",
+      "A minimalist terminal-style developer portfolio built using HTML, CSS, and vanilla JavaScript",
+      `<a href='${constants.projects.TERMINAL_PORTFOLIO}' target='_blank'>${constants.projects.TERMINAL_PORTFOLIO}</a>`,
+      "<br>",
+      "<span class='command'>GPA Calculator</span>",
+      "A simple, user-friendly GPA calculator built using HTML, CSS, and JavaScript to help students calculate their SGPA, and CGPA easily.",
+      `<a href='${constants.projects.GPA_CALCULATOR}' target='_blank'>${constants.projects.GPA_CALCULATOR}</a>`,
       "<br>"
     ]
   },
@@ -34,9 +55,9 @@ export const COMMANDS = {
   social: {
     output: [
       "<br>",
-      "GitHub   : <a href='https://github.com/yourusername' target='_blank'>github.com/yourusername</a>",
-      "LinkedIn : <a href='https://linkedin.com/in/yourusername' target='_blank'>linkedin.com/in/yourusername</a>",
-      "Twitter  : <a href='https://twitter.com/yourusername' target='_blank'>twitter.com/yourusername</a>",
+      `GitHub     : <a href=${constants.socials.GITHUB_URL} target='_blank'>github/${constants.socials.GITHUB_URL.split('/').pop()}</a>`,
+      `LinkedIn   : <a href='${constants.socials.LINKEDIN_URL}' target='_blank'>linkedin/${constants.socials.INSTAGRAM_URL.split('/').pop()}</a>`,
+      `Instagram  : <a href='${constants.socials.INSTAGRAM_URL}' target='_blank'>instagram/${constants.socials.INSTAGRAM_URL.split('/').pop()}</a>`,
       "<br>"
     ]
   },
