@@ -11,6 +11,8 @@ let buffer = "";
 let mode = "boot";
 let lastCommand = "";
 let titleIndex = 0;
+let commandHistory = [];
+let historyIndex = -1;
 
 const typeBootTitle = () => {
     if(titleIndex <= BOOT_TITLE.length && mode === "boot"){
@@ -56,6 +58,33 @@ const clearTerminal = () => {
 
 shell.addEventListener("keydown", (e) => {
     if(e.ctrlKey || e.metaKey) return;
+    if(e.key === "ArrowUp"){
+        e.preventDefault();
+        if(commandHistory.length === 0) return;
+        if(historyIndex === -1){
+            historyIndex = commandHistory.length - 1;
+        } else if(historyIndex > 0){
+            historyIndex--;
+        }
+        buffer = commandHistory[historyIndex];
+        typer.textContent = buffer;
+        return;
+    }
+    
+    if(e.key === "ArrowDown"){
+        e.preventDefault();
+        if(commandHistory.length === 0 || historyIndex === -1) return;
+        if(historyIndex < commandHistory.length - 1){
+            historyIndex++;
+            buffer = commandHistory[historyIndex];
+        } else {
+            historyIndex = -1;
+            buffer = "";
+        }
+        typer.textContent = buffer;
+        return;
+    }
+    
     if(e.key === "Backspace"){
         e.preventDefault();
         buffer = buffer.slice(0, -1);
@@ -83,6 +112,11 @@ shell.addEventListener("keydown", (e) => {
         }else if(entry?.output){
             printLines(entry.output);
         }
+
+        if(command !== "" && command !== commandHistory[commandHistory.length - 1]){
+            commandHistory.push(command);
+        }
+        historyIndex = -1;
 
         updateTitle(command);
 
