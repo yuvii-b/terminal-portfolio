@@ -22,6 +22,34 @@ body {
     background: #300a24;
 }
 
+#terminal pre {
+    color: #8ae234;
+    margin: 0;
+    line-height: 1.2em;
+    white-space: pre;
+    font-family: 'Ubuntu Mono', 'DejaVu Sans Mono', 'Liberation Mono', 'Consolas', monospace;
+}
+
+.header {
+    color: #8ae234;
+}
+
+.art {
+    color: #ffffff;
+}
+
+.title {
+    color: #fce94f;
+}
+
+.separator {
+    color: #729fcf;
+}
+
+.welcome {
+    color: #8ae234;
+}
+
 body::-webkit-scrollbar {
     width: 8px;
 }

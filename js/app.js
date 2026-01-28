@@ -1,4 +1,4 @@
-import {PROMPT, BOOT_TITLE, PAUSED_TITLE} from './config.js';
+import {PROMPT, BOOT_TITLE, PAUSED_TITLE, ASCII_ART} from './config.js';
 import {COMMANDS} from './commands.js';
 
 const shell = document.getElementById("shell");
@@ -13,6 +13,17 @@ let lastCommand = "";
 let titleIndex = 0;
 let commandHistory = [];
 let historyIndex = -1;
+
+const displayAsciiArt = () => {
+    ASCII_ART.forEach(line => {
+        const pre = document.createElement("pre");
+        pre.textContent = line.text;
+        if(line.class) pre.className = line.class;
+        terminal.insertBefore(pre, boundary);
+    });
+    mode = "input";
+};
+displayAsciiArt();
 
 const typeBootTitle = () => {
     if(titleIndex <= BOOT_TITLE.length && mode === "boot"){
