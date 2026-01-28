@@ -8,6 +8,7 @@ export const COMMANDS = {
       "<span class='command'>about</span>    - About me",
       "<span class='command'>projects</span> - View coding projects",
       "<span class='command'>social</span>   - View social links",
+      "<span class='command'>resume</span>   - View my resume",
       "<span class='command'>clear</span>    - Clear terminal",
       "<br>"
     ]
@@ -58,6 +59,28 @@ export const COMMANDS = {
       `GitHub     : <a href=${constants.socials.GITHUB_URL} target='_blank'>github/${constants.socials.GITHUB_URL.split('/').pop()}</a>`,
       `LinkedIn   : <a href='${constants.socials.LINKEDIN_URL}' target='_blank'>linkedin/${constants.socials.INSTAGRAM_URL.split('/').pop()}</a>`,
       `Instagram  : <a href='${constants.socials.INSTAGRAM_URL}' target='_blank'>instagram/${constants.socials.INSTAGRAM_URL.split('/').pop()}</a>`,
+      "<br>"
+    ]
+  },
+
+  resume: {
+    output: [
+      "<br>",
+      "Opening resume in new tab...",
+      "<br>"
+    ],
+    action: "OPEN_URL",
+    url: constants.RESUME_URL
+  },
+
+  ls: {
+    output: [
+      "<br>",
+      "about",
+      "projects",
+      "resume",
+      "social",
+      "help",
       "<br>"
     ]
   },

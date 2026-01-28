@@ -16,6 +16,8 @@ export const projects = {
     GPA_CALCULATOR: "https://github.com/yuvii-b/gpa-calc"
 };
 
+export const RESUME_URL = "./assets/resume.pdf";
+
 export const ASCII_ART = [
     { text: '', class: '' },
     { text: '██╗   ██╗██╗   ██╗██╗   ██╗ █████╗ ██████╗  █████╗      ██╗    ██████╗         ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗ ', class: 'title' },

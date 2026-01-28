@@ -120,6 +120,9 @@ shell.addEventListener("keydown", (e) => {
             ]);
         }else if(entry?.action === "CLEAR"){
             clearTerminal();
+        }else if(entry?.action === "OPEN_URL"){
+            if(entry.output) printLines(entry.output);
+            if(entry.url) window.open(entry.url, '_blank');
         }else if(entry?.output){
             printLines(entry.output);
         }
