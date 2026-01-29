@@ -52,14 +52,74 @@ document.addEventListener("click", () => {
     shell.focus();
 });
 
-const printLine = (html) => {
+const printLine = async (html, animate = true) => {
     const p = document.createElement("p");
-    p.innerHTML = html;
     terminal.insertBefore(p, boundary);
+    
+    if (!animate) {
+        p.innerHTML = html;
+        return Promise.resolve();
+    }
+
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+
+    return new Promise(resolve => {
+        let currentIndex = 0;
+        const elements = [];
+    
+        const extractNodes = (node) => {
+            node.childNodes.forEach(child => {
+                if (child.nodeType === Node.TEXT_NODE) {
+                    const text = child.textContent;
+                    for (let char of text) {
+                        elements.push({ type: 'text', content: char });
+                    }
+                } else if (child.nodeType === Node.ELEMENT_NODE) {
+                    elements.push({ type: 'elementStart', element: child.cloneNode(false) });
+                    extractNodes(child);
+                    elements.push({ type: 'elementEnd' });
+                }
+            });
+        };
+        
+        extractNodes(temp);
+        
+        const typeChar = () => {
+            if (currentIndex >= elements.length) {
+                resolve();
+                return;
+            }
+            
+            const item = elements[currentIndex++];
+            
+            if (item.type === 'text') {
+                const textNode = document.createTextNode(item.content);
+                const container = p.querySelector('.typing-container:last-child') || p;
+                container.appendChild(textNode);
+            } else if (item.type === 'elementStart') {
+                const clone = item.element.cloneNode(false);
+                clone.classList.add('typing-container');
+                const container = p.querySelector('.typing-container:last-child') || p;
+                container.appendChild(clone);
+            } else if (item.type === 'elementEnd') {
+                const lastContainer = p.querySelector('.typing-container:last-child');
+                if (lastContainer) {
+                    lastContainer.classList.remove('typing-container');
+                }
+            }
+            
+            setTimeout(typeChar, 15); // Adjust speed here (lower = faster)
+        };
+        
+        typeChar();
+    });
 }
 
-const printLines = (lines) => {
-    lines.forEach(line => printLine(line));
+const printLines = async (lines) => {
+    for (const line of lines) {
+        await printLine(line);
+    }
 }
 
 const clearTerminal = () => {
@@ -109,24 +169,6 @@ shell.addEventListener("keydown", (e) => {
         inputLine.innerHTML = `<span class="prompt">${PROMPT}</span> <span class="command">${buffer}</span>`;
         terminal.insertBefore(inputLine, boundary);
 
-        const entry = COMMANDS[command];
-
-        if(!entry && command !== ""){
-            printLines([
-                "<br>",
-                `<span class="error">command not found</span>`,
-                "Type <span class='command'>help</span> to see available commands.",
-                "<br>"
-            ]);
-        }else if(entry?.action === "CLEAR"){
-            clearTerminal();
-        }else if(entry?.action === "OPEN_URL"){
-            if(entry.output) printLines(entry.output);
-            if(entry.url) window.open(entry.url, '_blank');
-        }else if(entry?.output){
-            printLines(entry.output);
-        }
-
         if(command !== "" && command !== commandHistory[commandHistory.length - 1]){
             commandHistory.push(command);
         }
@@ -136,7 +178,33 @@ shell.addEventListener("keydown", (e) => {
 
         buffer = "";
         typer.textContent = "";
-        boundary.scrollIntoView({behavior: "smooth"});
+        commandArea.style.visibility = "hidden";
+
+        const entry = COMMANDS[command];
+
+        const handleCommand = async () => {
+            if(!entry && command !== ""){
+                await printLines([
+                    "<br>",
+                    `<span class="error">command not found</span>`,
+                    "Type <span class='command'>help</span> to see available commands.",
+                    "<br>"
+                ]);
+            }else if(entry?.action === "CLEAR"){
+                clearTerminal();
+            }else if(entry?.action === "OPEN_URL"){
+                if(entry.output) await printLines(entry.output);
+                if(entry.url) window.open(entry.url, '_blank');
+            }else if(entry?.output){
+                await printLines(entry.output);
+            }
+            commandArea.style.visibility = "visible";
+            shell.focus();
+            boundary.scrollIntoView({behavior: "smooth"});
+        };
+        
+        handleCommand();
+
         return;
     }
     if(e.key.length === 1){
