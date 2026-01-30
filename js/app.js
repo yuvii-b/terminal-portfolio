@@ -14,13 +14,29 @@ let titleIndex = 0;
 let commandHistory = [];
 let historyIndex = -1;
 
-const displayAsciiArt = () => {
-    ASCII_ART.forEach(line => {
+const displayAsciiArt = async () => {
+    const bannerElements = [];
+    for(const line of ASCII_ART) {
         const pre = document.createElement("pre");
         pre.textContent = line.text;
         if(line.class) pre.className = line.class;
+
+        if(line.class === 'title') {
+            pre.classList.add('banner-fade');
+            bannerElements.push(pre);
+        }
+        
         terminal.insertBefore(pre, boundary);
-    });
+        if(line.class === 'title') {
+            await new Promise(resolve => setTimeout(resolve, 80));
+        }
+    }
+    if(bannerElements.length > 0) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        bannerElements.forEach(element => {
+            element.classList.add('banner-flash');
+        });
+    }
     mode = "input";
 };
 displayAsciiArt();
@@ -109,7 +125,7 @@ const printLine = async (html, animate = true) => {
                 }
             }
             
-            setTimeout(typeChar, 15); // Adjust speed here (lower = faster)
+            setTimeout(typeChar, 7); // Adjust speed here (lower = faster)
         };
         
         typeChar();
