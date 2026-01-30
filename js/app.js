@@ -192,6 +192,9 @@ shell.addEventListener("keydown", (e) => {
                 ]);
             }else if(entry?.action === "CLEAR"){
                 clearTerminal();
+            }else if(entry?.action === "EXIT"){
+                if(entry.output) await printLines(entry.output);
+                setTimeout(() => window.close(), 500);
             }else if(entry?.action === "OPEN_URL"){
                 if(entry.output) await printLines(entry.output);
                 if(entry.url) window.open(entry.url, '_blank');

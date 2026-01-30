@@ -10,6 +10,7 @@ export const COMMANDS = {
       "<span class='command'>social</span>   - View social links",
       "<span class='command'>resume</span>   - View my resume",
       "<span class='command'>clear</span>    - Clear terminal",
+      "<span class='command'>exit</span>     - Close terminal",
       "<br>"
     ]
   },
@@ -87,5 +88,14 @@ export const COMMANDS = {
 
   clear: {
     action: "CLEAR"
+  },
+
+  exit: {
+    output: [
+      "<br>",
+      "Closing terminal...",
+      "<br>"
+    ],
+    action: "EXIT"
   }
 };
