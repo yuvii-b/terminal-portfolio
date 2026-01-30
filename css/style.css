@@ -7,47 +7,79 @@
 body {
     margin: 0;
     padding: 15px 20px;
-    background: #300a24;
-    color: #ffffff;
-    font-family: 'Ubuntu Mono', 'DejaVu Sans Mono', 'Liberation Mono', 'Consolas', monospace;
+    background: #0a0e14;
+    color: #e6e1dc;
+    font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
     font-size: 15px;
     line-height: 1.3em;
     min-height: 100vh;
     overflow-x: hidden;
     scrollbar-width: thin;
-    scrollbar-color: #555555 #300a24;
+    scrollbar-color: #2d3640 #0a0e14;
 }
 
 #terminal {
-    background: #300a24;
+    background: #0a0e14;
 }
 
 #terminal pre {
-    color: #8ae234;
+    color: #39bae6;
     margin: 0;
     line-height: 1.2em;
     white-space: pre;
-    font-family: 'Ubuntu Mono', 'DejaVu Sans Mono', 'Liberation Mono', 'Consolas', monospace;
+    font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+}
+
+.banner-fade {
+    animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.banner-flash {
+    animation: flash 0.8s ease-out;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0;
+        text-shadow: 0 0 20px #39bae6;
+    }
+    30% {
+        opacity: 1;
+        text-shadow: 0 0 20px #39bae6, 0 0 40px #39bae6;
+    }
+    100% {
+        opacity: 1;
+        text-shadow: none;
+    }
 }
 
 .header {
-    color: #8ae234;
+    color: #39bae6;
 }
 
 .art {
-    color: #ffffff;
+    color: #c7c7c7;
 }
 
 .title {
-    color: #fce94f;
+    color: #ffb454;
 }
 
 .separator {
-    color: #729fcf;
+    color: #59c2ff;
 }
 
 .welcome {
-    color: #8ae234;
+    color: #7aa2f7 !important;
 }
 
 body::-webkit-scrollbar {
@@ -55,16 +87,16 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-    background: #300a24;
+    background: #0a0e14;
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #555555;
+    background: #2d3640;
     border-radius: 4px;
 }
 
 body::-webkit-scrollbar-thumb:hover {
-    background: #666666;
+    background: #3d4654;
 }
 
 #terminal p {
@@ -77,7 +109,7 @@ body::-webkit-scrollbar-thumb:hover {
 #command {
     position: relative;
     margin-top: 0;
-    background: #300a24;
+    background: #0a0e14;
     display: flex;
     align-items: center;
 }
@@ -93,7 +125,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 #liner {
     font-size: 15px;
-    color: #ffffff;
+    color: #e6e1dc;
     display: flex;
     align-items: center;
     width: 100%;
@@ -102,33 +134,33 @@ body::-webkit-scrollbar-thumb:hover {
 
 #liner::before {
     content: "yuvi@dev:~$ ";
-    color: #8ae234;
+    color: #39bae6;
     font-weight: normal;
     margin-right: 0;
     user-select: none;
 }
 
 .prompt {
-    color: #8ae234;
+    color: #39bae6;
     font-weight: normal;
     user-select: none;
 }
 
 #typer {
-    color: #ffffff;
+    color: #e6e1dc;
     margin-left: 8px;
     margin-right: 2px;
     white-space: pre;
 }
 
 .command {
-    color: #ffffff;
+    color: #e6e1dc;
     font-weight: normal;
 }
 
 .cursor {
-    color: #ffffff;
-    background-color: #ffffff;
+    color: #0a0e14;
+    background-color: #39bae6;
     animation: blinker 1s linear infinite;
     font-weight: normal;
     font-size: 15px;
@@ -142,22 +174,22 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .error {
-    color: #ff5555;
+    color: #ff6b6b;
     font-weight: normal;
 }
 
 a {
-    color: #729fcf;
+    color: #59c2ff;
     text-decoration: underline;
 }
 
 a:hover {
-    background: #8ae234;
-    color: #300a24;
+    background: #1a2332;
+    color: #59c2ff;
 }
 
 a:visited {
-    color: #ad7fa8;
+    color: #bb9af7;
 }
 
 a:focus {
@@ -170,13 +202,13 @@ a:focus {
 }
 
 ::selection {
-    background: #ffffff;
-    color: #300a24;
+    background: #39bae6;
+    color: #0a0e14;
 }
 
 ::-moz-selection {
-    background: #ffffff;
-    color: #300a24;
+    background: #39bae6;
+    color: #0a0e14;
 }
 
 body:focus-within {
