@@ -143,43 +143,13 @@ const clearTerminal = () => {
     boundary = document.getElementById("boundary");
 }
 
-shell.addEventListener("keydown", (e) => {
-    if(e.ctrlKey || e.metaKey) return;
-    if(e.key === "ArrowUp"){
-        e.preventDefault();
-        if(commandHistory.length === 0) return;
-        if(historyIndex === -1){
-            historyIndex = commandHistory.length - 1;
-        } else if(historyIndex > 0){
-            historyIndex--;
-        }
-        buffer = commandHistory[historyIndex];
-        typer.textContent = buffer;
-        return;
-    }
+shell.addEventListener("input", (e) => {
+    const value = shell.value;
     
-    if(e.key === "ArrowDown"){
+    if(value.includes('\n')){
         e.preventDefault();
-        if(commandHistory.length === 0 || historyIndex === -1) return;
-        if(historyIndex < commandHistory.length - 1){
-            historyIndex++;
-            buffer = commandHistory[historyIndex];
-        } else {
-            historyIndex = -1;
-            buffer = "";
-        }
-        typer.textContent = buffer;
-        return;
-    }
-    
-    if(e.key === "Backspace"){
-        e.preventDefault();
-        buffer = buffer.slice(0, -1);
-        typer.textContent = buffer;
-        return;
-    }
-    if(e.key === "Enter"){
-        e.preventDefault();
+        shell.value = '';
+        
         const command = buffer.trim();
         const inputLine = document.createElement("p");
         inputLine.innerHTML = `<span class="prompt">${PROMPT}</span> <span class="command">${buffer}</span>`;
@@ -223,12 +193,54 @@ shell.addEventListener("keydown", (e) => {
         };
         
         handleCommand();
+        return;
+    }
+    
+    buffer = value;
+    typer.textContent = buffer;
+});
 
+shell.addEventListener("keydown", (e) => {
+    if(e.ctrlKey || e.metaKey) return;
+    if(e.key === "ArrowUp"){
+        e.preventDefault();
+        if(commandHistory.length === 0) return;
+        if(historyIndex === -1){
+            historyIndex = commandHistory.length - 1;
+        } else if(historyIndex > 0){
+            historyIndex--;
+        }
+        buffer = commandHistory[historyIndex];
+        shell.value = buffer;
+        typer.textContent = buffer;
+        return;
+    }
+    
+    if(e.key === "ArrowDown"){
+        e.preventDefault();
+        if(commandHistory.length === 0 || historyIndex === -1) return;
+        if(historyIndex < commandHistory.length - 1){
+            historyIndex++;
+            buffer = commandHistory[historyIndex];
+        } else {
+            historyIndex = -1;
+            buffer = "";
+        }
+        shell.value = buffer;
+        typer.textContent = buffer;
+        return;
+    }
+    
+    if(e.key === "Backspace"){
+        return;
+    }
+    if(e.key === "Enter"){
+        e.preventDefault();
+        shell.value = buffer + '\n';
+        shell.dispatchEvent(new Event('input'));
         return;
     }
     if(e.key.length === 1){
-        e.preventDefault();
-        buffer += e.key;
-        typer.textContent = buffer;
+        return;
     }
 });

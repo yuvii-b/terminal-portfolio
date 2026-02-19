@@ -16,6 +16,7 @@ body {
     overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: #2d3640 #0a0e14;
+    touch-action: manipulation;
 }
 
 #terminal {
@@ -112,15 +113,24 @@ body::-webkit-scrollbar-thumb:hover {
     background: #0a0e14;
     display: flex;
     align-items: center;
+    min-height: 1.5em;
+    width: 100%;
 }
 
 #shell {
     position: absolute;
     opacity: 0;
-    width: 1px;
-    height: 1px;
+    width: 100%;
+    height: 100%;
     left: 0;
     top: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: transparent;
+    font-size: 16px;
+    cursor: text;
+    resize: none;
 }
 
 #liner {
@@ -130,6 +140,9 @@ body::-webkit-scrollbar-thumb:hover {
     align-items: center;
     width: 100%;
     line-height: 1.3em;
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
 }
 
 #liner::before {
@@ -218,25 +231,151 @@ body:focus-within {
 @media (max-width: 768px) {
     body {
         font-size: 14px;
-        padding: 15px;
+        padding: 12px 15px;
+        -webkit-text-size-adjust: 100%;
+    }
+    
+    #shell {
+        font-size: 16px;
     }
     
     #liner {
         font-size: 14px;
+        display: flex;
+        align-items: center;
+    }
+    
+    #typer {
+        display: inline;
+        visibility: visible;
+        color: #e6e1dc;
+        font-size: 14px;
+    }
+    
+    #command {
+        display: flex;
+        visibility: visible !important;
+    }
+    
+    .cursor {
+        font-size: 14px;
+        display: inline;
+    }
+    
+    #terminal pre {
+        font-size: 14px;
+        overflow-x: auto;
+        display: block;
+    }
+    
+    #terminal p {
+        word-break: break-word;
+        display: block;
+        visibility: visible;
+    }
+    
+    /* Hide ASCII art on tablets and smaller screens */
+    .title {
+        display: none !important;
     }
 }
 
 @media (max-width: 480px) {
     body {
+        font-size: 13px;
+        padding: 8px 10px;
+        line-height: 1.4em;
+        -webkit-text-size-adjust: 100%;
+    }
+    
+    #shell {
+        font-size: 16px;
+    }
+    
+    #liner {
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+    }
+    
+    #typer {
+        display: inline;
+        visibility: visible;
+        color: #e6e1dc;
+        font-size: 13px;
+        margin-left: 4px;
+    }
+    
+    #command {
+        display: flex;
+        visibility: visible !important;
+    }
+    
+    .cursor {
+        font-size: 13px;
+        display: inline;
+    }
+    
+    #liner::before {
+        content: "$ ";
+        margin-right: 4px;
+    }
+    
+    #terminal pre {
+        font-size: 13px;
+        overflow-x: auto;
+        display: block;
+        white-space: pre;
+    }
+    
+    #terminal p {
+        font-size: 13px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        display: block;
+        visibility: visible;
+    }
+    
+    a {
+        padding: 2px 4px;
+        display: inline-block;
+        margin: 1px 0;
+    }
+    
+    .prompt,
+    .command,
+    .error {
+        display: inline;
+        visibility: visible;
+    }
+}
+
+@media (max-width: 360px) {
+    body {
         font-size: 12px;
-        padding: 10px;
+        padding: 6px 8px;
     }
     
     #liner {
         font-size: 12px;
     }
     
-    #liner::before {
-        content: "$ ";
+    #typer {
+        font-size: 12px;
+    }
+    
+    .cursor {
+        font-size: 12px;
+    }
+    
+    #terminal pre,
+    #terminal p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    body {
+        padding: 8px 12px;
     }
 }
