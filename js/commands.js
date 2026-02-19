@@ -18,11 +18,23 @@ export const COMMANDS = {
   about: {
   output: [
     "<br>",
-    "Yuvaraj (<span class='command'>Yuvi</span>)",
-    "I'm a Computer Science undergraduate at the Madras Institute of Technology.", 
-    "I like working on logic-based problems and building things from scratch just to see how they actually work.",
-    "Most days I'm either learning core CS concepts, experimenting with small projects, or breaking something and fixing it again.",
-    "Also a member of Google Developer Groups (GDG).",
+    "<span class='command'>YUVARAJ B</span> | BE CSE @ MIT, ANNA UNIVERSITY",
+    "<br>",
+    "backend builder",
+    "core cs learner",
+    "open-source contributor",
+    "<br>",
+    "backend co-lead @ gdg-mit",
+    "<br>",
+    "packets > pixels",
+    "<br>",
+    "most days you'll find me:",
+    "• building small projects just to understand how things actually work",
+    "• breaking perfectly fine setups and fixing them again",
+    "<br>",
+    "that one friend who says \"bro, just switch to linux\"",
+    "<br>",
+    "i use arch btw :)",
     "<br>"
   ]
 },
@@ -50,6 +62,8 @@ export const COMMANDS = {
       "<span class='command'>GPA Calculator</span>",
       "A simple, user-friendly GPA calculator built using HTML, CSS, and JavaScript to help students calculate their SGPA, and CGPA easily.",
       `<a href='${constants.projects.GPA_CALCULATOR}' target='_blank'>${constants.projects.GPA_CALCULATOR}</a>`,
+      "<br>",
+      `Find more on my <a href='${constants.socials.GITHUB_URL}' target='_blank'>github</a>`,
       "<br>"
     ]
   },
@@ -57,9 +71,9 @@ export const COMMANDS = {
   social: {
     output: [
       "<br>",
-      `GitHub     : <a href=${constants.socials.GITHUB_URL} target='_blank'>github/${constants.socials.GITHUB_URL.split('/').pop()}</a>`,
-      `LinkedIn   : <a href='${constants.socials.LINKEDIN_URL}' target='_blank'>linkedin/${constants.socials.INSTAGRAM_URL.split('/').pop()}</a>`,
-      `Instagram  : <a href='${constants.socials.INSTAGRAM_URL}' target='_blank'>instagram/${constants.socials.INSTAGRAM_URL.split('/').pop()}</a>`,
+      `GitHub     : <a href='${constants.socials.GITHUB_URL}' target='_blank'>github/${constants.socials.GITHUB_URL.replace(/\/$/, '').split('/').pop()}</a>`,
+      `LinkedIn   : <a href='${constants.socials.LINKEDIN_URL}' target='_blank'>linkedin/${constants.socials.LINKEDIN_URL.replace(/\/$/, '').split('/').pop()}</a>`,
+      `Instagram  : <a href='${constants.socials.INSTAGRAM_URL}' target='_blank'>instagram/${constants.socials.INSTAGRAM_URL.replace(/\/$/, '').split('/').pop()}</a>`,
       "<br>"
     ]
   },
@@ -93,7 +107,7 @@ export const COMMANDS = {
   exit: {
     output: [
       "<br>",
-      "Closing terminal...",
+      "Goodbye! 👋",
       "<br>"
     ],
     action: "EXIT"

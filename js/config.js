@@ -4,8 +4,8 @@ export const PAUSED_TITLE = "⏸ terminal paused";
 
 export const socials = {
     GITHUB_URL: "https://github.com/yuvii-b",
-    LINKEDIN_URL: "https://github.com/yuvii-b",
-    INSTAGRAM_URL: "https://github.com/yuvii-b"
+    LINKEDIN_URL: "https://www.linkedin.com/in/yuvaraj2806",
+    INSTAGRAM_URL: "https://www.instagram.com/yuviiii.b/"
 };
 
 export const projects = {

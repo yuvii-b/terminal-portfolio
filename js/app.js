@@ -10,7 +10,6 @@ let boundary = document.getElementById("boundary");
 let buffer = "";
 let mode = "boot";
 let lastCommand = "";
-let titleIndex = 0;
 let commandHistory = [];
 let historyIndex = -1;
 
@@ -41,13 +40,7 @@ const displayAsciiArt = async () => {
 };
 displayAsciiArt();
 
-const typeBootTitle = () => {
-    if(titleIndex <= BOOT_TITLE.length && mode === "boot"){
-        document.title = BOOT_TITLE.slice(0, titleIndex++);
-        setTimeout(typeBootTitle, 150);
-    }
-};
-typeBootTitle();
+document.title = BOOT_TITLE;
 
 const updateTitle = (command = "") => {
     mode = "shell";
@@ -141,13 +134,15 @@ const printLines = async (lines) => {
 const clearTerminal = () => {
     terminal.innerHTML = '<a id="boundary"></a>';
     boundary = document.getElementById("boundary");
+    buffer = "";
+    shell.value = "";
+    typer.textContent = "";
 }
 
 shell.addEventListener("input", (e) => {
     const value = shell.value;
     
     if(value.includes('\n')){
-        e.preventDefault();
         shell.value = '';
         
         const command = buffer.trim();
@@ -163,6 +158,7 @@ shell.addEventListener("input", (e) => {
         updateTitle(command);
 
         buffer = "";
+        shell.value = "";
         typer.textContent = "";
         commandArea.style.visibility = "hidden";
 
@@ -180,7 +176,11 @@ shell.addEventListener("input", (e) => {
                 clearTerminal();
             }else if(entry?.action === "EXIT"){
                 if(entry.output) await printLines(entry.output);
-                setTimeout(() => window.close(), 500);
+                setTimeout(() => {
+                    window.open('', '_self', '');
+                    window.close();
+                }, 500);
+                return; // Don't restore visibility when exiting
             }else if(entry?.action === "OPEN_URL"){
                 if(entry.output) await printLines(entry.output);
                 if(entry.url) window.open(entry.url, '_blank');
