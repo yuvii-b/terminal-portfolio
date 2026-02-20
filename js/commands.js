@@ -108,6 +108,7 @@ export const COMMANDS = {
     output: [
       "<br>",
       "Goodbye! 👋",
+      "You can close this tab with <span class='command'>Ctrl+W</span> or just close it manually.",
       "<br>"
     ],
     action: "EXIT"
